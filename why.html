@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .button {
+         border-style: solid;
+         border-color:white ;
+         background-color:black;
+         color: LawnGreen;
+         padding: 5px 10px;
+         text-align: center;
+         text-decoration: none;
+         display: inline-block;
+         font-size: 16px;
+         margin: 2px 0px;
+         cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='mama'>
+    	<label for="name">APK Name </label>
+
+<input type="text" id="name" name="name" required size="40">
+<br>
+
+      <button class = "button" type="button" onclick="GO()">GO</button>
+    </div>
+    <script>
+           var queryString = decodeURIComponent(window.location.search); //parsing
+           queryString = queryString.substring(1);
+           var file = queryString.split("&");
+         </script>
+
+
+    <script type="text/javascript" src="socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+     var app='presentation';
+      var socket = io.connect('http://127.0.0.1:5000');
+      socket.on('connect', function() {
+
+      });
+      socket.on('my event',function(d){
+    console.log(d);
+  });
+    </script>
+    <script>
+
+function GO(){
+      apk_name = document.getElementById('name').value
+
+      socket.emit('my event' ,apk_name);
+      socket.on('response', (data) => {
+        console.log(data)
+        let p = document.createElement('p')
+        p.textContent = data
+        document.getElementById('mama').appendChild(p)
+      })
+      
+}
+
+</script>
+</body>
+</html>
+       
