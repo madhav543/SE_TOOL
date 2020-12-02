@@ -1,4 +1,4 @@
-
+#copy rights reserved
 # ALL REQUIRED LIBRARIES
 
 from pycorenlp import StanfordCoreNLP
